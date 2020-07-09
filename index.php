@@ -1,6 +1,7 @@
 <?php
 include 'errors.php';
-
+require 'vendor/autoload.php';
+use GuzzleHttp\Client as Client;
 function setCache($content, $cacheId) // записываем файл
 {
     if ($content == '') {
@@ -31,47 +32,63 @@ function getCache($cacheId, $cashExpired = true, &$fileName = '') //кэширу
     }
     return file_get_contents($fileName);
 }
-
-function curlLoad($url, $cash = 0)
+function guzzleLoad($url, $cash = 0)
 {
     $cacheId = $url;
     if ($content = getCache($cacheId, $cash)) {
-        // если заблочили то добавить этот кодик
-//        1 - ая часть
-//        if (!strpos($content, 'Location: .... blocked')) {
-//            return $content;
-//        }
-
         return $content;
     }
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 15);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-//    curl_setopt($ch, CURLOPT_HEADER,1);
-    //    2 - ая часть
-//    $headers = array(
-//            хедер страницы
-//    );
-//    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    $content = curl_exec($ch);
-    curl_close($ch);
-//    3 - ая часть
-//    $rx = '~^(HTTP.*?)~is';
-//    preg_match($rx, $content, $a);
-//    $header = $a[0];
-//    $content = str_replace($header, '', $content);
-//    if (strpos($header, 'Location: ... blocked')) {
-//        echo '<h3>Заблокировали на сайте</h3>';
-    //    echo '<pre>' .$header. '</pre>';
-    //    exit;
-//    }
-//    sleep(rand(2, 5));
+    $client = new Client([
+        'base_uri' => $url,
+        'timeout' => 2.0
+    ]);
+    $response = $client->request('GET');
+
+    $content = $response->getBody()->getContents();
 
     setCache($content, $cacheId);
     return $content;
 }
+//function curlLoad($url, $cash = 0)
+//{
+//    $cacheId = $url;
+//    if ($content = getCache($cacheId, $cash)) {
+//        // если заблочили то добавить этот кодик
+////        1 - ая часть
+////        if (!strpos($content, 'Location: .... blocked')) {
+////            return $content;
+////        }
+//
+//        return $content;
+//    }
+//    $ch = curl_init();
+//    curl_setopt($ch, CURLOPT_URL, $url);
+//    curl_setopt($ch, CURLOPT_TIMEOUT, 15);
+//    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+//    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+////    curl_setopt($ch, CURLOPT_HEADER,1);
+//    //    2 - ая часть
+////    $headers = array(
+////            хедер страницы
+////    );
+////    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+//    $content = curl_exec($ch);
+//    curl_close($ch);
+////    3 - ая часть
+////    $rx = '~^(HTTP.*?)~is';
+////    preg_match($rx, $content, $a);
+////    $header = $a[0];
+////    $content = str_replace($header, '', $content);
+////    if (strpos($header, 'Location: ... blocked')) {
+////        echo '<h3>Заблокировали на сайте</h3>';
+//    //    echo '<pre>' .$header. '</pre>';
+//    //    exit;
+////    }
+////    sleep(rand(2, 5));
+//
+//    setCache($content, $cacheId);
+//    return $content;
+//}
 
 function POST($key, $default = '')
 {
@@ -116,7 +133,7 @@ class Korshop
     {
 
 
-        $content = curlLoad($url, $cash = 3600);
+        $content = guzzleLoad($url, $cash = 3600);
 
         preg_matchx('~<div class="showcase clearfix" id="showcaseview">(.*?)<div class="ajaxpages showcase">~is', $content, $a);
         $innerContent = $a[0];
@@ -140,7 +157,7 @@ class Korshop
             preg_match('~<div class="name"><a href="(.*?)"~is', $rowContent, $a);
             $row['url'] = 'https://korshop.ru' . $a[1];
 // берем данные из карточки
-            $cardContent = curlLoad($row['url'], 86400);
+            $cardContent = guzzleLoad($row['url'], 86400);
 
             if (preg_match('~<div class="exp_date">\s*<b>Срок годности:</b>\s*(.*?)\s*</div>\s*<div class="previewtext" itemprop="description">~is', $cardContent, $a)) {
                 $endsDate = $a[1];
