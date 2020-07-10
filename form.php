@@ -45,7 +45,8 @@ include 'index.php';
         &nbsp;
         <div class="form-group">
             <label for="">кол-во</label>
-            <input type="text" class="form-control" name="maxPage" value="<?= POST('maxPage', 1) ?>"
+
+            <input type="text" class="form-control" name="maxPage" value="<?= $resultPost->POST('maxPage', 1) ?>"
                    style="width: 50px;">
         </div>
         <div class="checkbox">
@@ -66,9 +67,9 @@ include 'index.php';
             integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
             crossorigin="anonymous"></script>
     <?php
-    include 'bd.php';
+    include 'class/bd.php';
     if ($_POST['url']) {
-        $korShop = new Korshop;
+        $korShop = new korShop\Korshop;
         $data = $korShop->parserKorShopAll($_POST['url'], $fromPage = 1, $_POST['maxPage']);
 
         if ($_POST['showAs'] == 'print_r') {
@@ -106,6 +107,8 @@ include 'index.php';
 //    echo '<pre>'; print_r($data); echo '<pre/>';
         }
     }
+
+    use bd\Database;
     //запись в бд с проверкой чекбокса...
     if ($_POST['loadPars'] == 1) {
         $title = $_POST['title'];
