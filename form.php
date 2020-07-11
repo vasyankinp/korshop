@@ -28,6 +28,9 @@ include 'index.php';
             <select id='select' class="form-control">
                 <option value="https://korshop.ru/catalog/ris_lapsha/ris_i_produkty_iz_nego/">РИС</option>
                 <option value="https://korshop.ru/catalog/ris_lapsha/lapsha/">Лапша</option>
+                <option value="https://korshop.ru/catalog/sousy_pasty_uksus_/">Соусы, пасты, уксус</option>
+                <option value="https://korshop.ru/catalog/sladosti_sneki/">Сладости, снэки</option>
+                <option value="https://korshop.ru/catalog/napitki_chay_kofe_zhenshen/">Чай, кофе</option>
             </select>
             </select>
         </div>
