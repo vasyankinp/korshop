@@ -7,10 +7,12 @@ class Guzzle {
 
     function guzzleLoad($url, $cash = 0)
     {
+        $this->fromCash = false;
         $cacheId = $url;
         $getCash = new GetCacheLoad();
         $setCash = new SetCashLoad();
         if ($content = $getCash->getCache($cacheId, $cash)) {
+            $this->fromCash = true;
             return $content;
         }
         $client = new Client([

@@ -20,14 +20,24 @@ include 'index.php';
     <form action="" class="form-inline korshop-form" method="post">
         <div class="form-group">
             <label><a href="<?= $url ?>" target="_blank">Url</a></label>
-            <input type="text" class="form-control" name="url" value="<?= $url ?>" style="width: 600px;">
+            <input type="text" class="form-control" name="url" value="<?= $url ?>" style="width: 400px;">
         </div>
+        
+        <div class="form-group">
+            <label for="">Товар</label>
+            <select id='select' class="form-control">
+                <option value="https://korshop.ru/catalog/ris_lapsha/ris_i_produkty_iz_nego/">РИС</option>
+                <option value="https://korshop.ru/catalog/ris_lapsha/lapsha/">Лапша</option>
+            </select>
+            </select>
+        </div>
+        
         <div class="form-group">
             <label>Показать как:</label>
             <?php
             $showAs = [
-                'print_r' => 'массив',
-                'table' => 'таблица'
+                'table' => 'таблица',
+                'print_r' => 'массив'
             ];
             ?>
             <select name="showAs" class="form-control">
@@ -57,15 +67,7 @@ include 'index.php';
     </form>
 
     <hr/>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-            crossorigin="anonymous"></script>
+
     <?php
     include 'class/bd.php';
     if ($_POST['url']) {
@@ -130,5 +132,22 @@ include 'index.php';
 
     ?>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $("#select").change(function(e) {
+$("input[name='url']").val(e.target.value);
+});
+</script>
+
 </body>
 </html>
