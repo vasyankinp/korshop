@@ -4,7 +4,7 @@ namespace KorShop;
 
 class Errors
 {
-    function preg_matchx($regexp, $content, &$result)
+    public function preg_matchx($regexp, $content, &$result)
     {
         $res = preg_match($regexp, $content, $result);
         if (!$res) {
@@ -13,7 +13,7 @@ class Errors
         return $res;
     }
 
-    function preg_matchx_all($regexp, $content, &$result)
+    public function preg_matchx_all($regexp, $content, &$result)
     {
         $res = preg_match_all($regexp, $content, $result);
         if (!$res) {

@@ -1,11 +1,14 @@
 <?php
 
 
-namespace KorShop;
+namespace KorShop\Loaders;
 
-class LoadContentFromCurl implements LoadCoupons
+use KorShop\SetCashLoad;
+use KorShop\GetCashLoad;
+
+class CurlLoader implements LoaderInterface
 {
-    function CurlAndGuzzleLoad($url, $cash = 0)
+    public function curlAndGuzzleLoad($url, $cash = 0)
     {
         $get = new GetCashLoad();
         $set = new SetCashLoad();

@@ -1,12 +1,14 @@
 <?php
 
-namespace KorShop;
+namespace KorShop\Loaders;
 
 use GuzzleHttp\Client as Client;
+use KorShop\SetCashLoad;
+use KorShop\GetCashLoad;
 
-class Guzzle implements LoadCoupons
+class GuzzleLoader implements LoaderInterface
 {
-    function CurlAndGuzzleLoad($url, $cash = 0)
+    public function curlAndGuzzleLoad($url, $cash = 0)
     {
         $this->fromCash = false;
         $cacheId = $url;

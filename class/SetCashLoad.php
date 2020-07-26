@@ -4,7 +4,7 @@ namespace KorShop;
 
 class SetCashLoad
 {
-    function setCache($content, $cacheId) // записываем файл
+    public function setCache($content, $cacheId) // записываем файл
     {
         if ($content == '') {
             return;

@@ -1,6 +1,7 @@
 <?php
 
 namespace KorShop;
+
 class DataBase
 {
     private $connection;

@@ -59,7 +59,7 @@ include 'index.php';
         <div class="form-group">
             <label for="">кол-во</label>
 
-            <input type="text" class="form-control" name="maxPage" value="<?= $resultPost->Post('maxPage', 1) ?>"
+            <input type="text" class="form-control" name="maxPage" value="<?= $resultPost->post('maxPage', 1) ?>"
                    style="width: 50px;">
         </div>
         <div class="checkbox">
@@ -73,8 +73,10 @@ include 'index.php';
 
     <?php
 
+    use KorShop\KorShop;
+
     if ($_POST['url']) {
-        $korShop = new KorShop\Korshop;
+        $korShop = new KorShop();
         $data = $korShop->parserKorShopAll($_POST['url'], $fromPage = 1, $_POST['maxPage']);
 
         if ($_POST['showAs'] == 'print_r') {
@@ -109,7 +111,6 @@ include 'index.php';
                 ?>
             </table>
             <?php
-//    echo '<pre>'; print_r($data); echo '<pre/>';
         }
     }
 
@@ -128,7 +129,6 @@ include 'index.php';
             $bd->query("INSERT INTO `product`(`title`, `price`, `images`, `url`, `endsDate`, `description`) VALUES ('{$store['title']}', '{$store['price']}', '{$store['images']}', '{$store['url']}', '{$store['endsDate']}', '{$store['description']}');");
         }
         $result = mysqli_query($bd);
-
         if ($result == false) {
             print("Произошла ошибка при выполнении запроса");
         }

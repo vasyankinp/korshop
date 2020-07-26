@@ -4,7 +4,7 @@ namespace KorShop;
 
 class GetCashLoad
 {
-    function getCache($cacheId, $cashExpired = true, &$fileName = '') //кэшируем файл
+    public function getCache($cacheId, $cashExpired = true, &$fileName = '') //кэшируем файл
     {
         if (!$cashExpired) {
             return;
