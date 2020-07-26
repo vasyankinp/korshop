@@ -2,7 +2,7 @@
 
 namespace KorShop;
 
-class Posts
+class HttpRequest
 {
     public function post($key, $default = '')
     {
