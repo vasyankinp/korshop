@@ -12,5 +12,10 @@
   "require": {
     "guzzlehttp/guzzle": "7.0",
     "ext-mysqli": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "KorShop\\": "class/"
+    }
   }
 }

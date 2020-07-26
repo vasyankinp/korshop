@@ -1,7 +1,8 @@
 <?php
 
-namespace GetCachLoad;
-class GetCacheLoad
+namespace KorShop;
+
+class GetCashLoad
 {
     function getCache($cacheId, $cashExpired = true, &$fileName = '') //кэшируем файл
     {

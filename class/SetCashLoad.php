@@ -1,6 +1,7 @@
 <?php
 
-namespace SetCachLoad;
+namespace KorShop;
+
 class SetCashLoad
 {
     function setCache($content, $cacheId) // записываем файл

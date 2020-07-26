@@ -1,15 +1,16 @@
 <?php
-namespace Client;
+
+namespace KorShop;
+
 use GuzzleHttp\Client as Client;
-use GetCachLoad\GetCacheLoad;
-use SetCachLoad\SetCashLoad;
+
 class Guzzle {
 
     function guzzleLoad($url, $cash = 0)
     {
         $this->fromCash = false;
         $cacheId = $url;
-        $getCash = new GetCacheLoad();
+        $getCash = new GetCashLoad();
         $setCash = new SetCashLoad();
         if ($content = $getCash->getCache($cacheId, $cash)) {
             $this->fromCash = true;

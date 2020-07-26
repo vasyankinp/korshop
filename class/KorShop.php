@@ -1,8 +1,10 @@
 <?php
-namespace korShop;
-use Client;
+
+namespace KorShop;
+
 use DateTime;
-class Korshop
+
+class KorShop
 {
 
     function parserKorShopAll($url, $fromPage = 1, $maxPage = false)
@@ -35,20 +37,17 @@ class Korshop
     function parserKorShopPage($url)
     {
 
-    $res = new Client\Guzzle();
+    $res = new Guzzle();
 
         $content = $res->guzzleLoad($url, $cash = 3600);
 
-        preg_matchx('~<div class="showcase clearfix" id="showcaseview">(.*?)<div class="ajaxpages showcase">~is', $content, $a);
+        $error = new Errors();
+        $error->preg_matchx('~<div class="showcase clearfix" id="showcaseview">(.*?)<div class="ajaxpages showcase">~is', $content, $a);
         $innerContent = $a[0];
-
         $rows = preg_split('~<div class="js-element~', $innerContent);
         array_shift($rows);
+        $error->preg_matchx_all('~<div class="js-element.*?</i>В избранное</a></div></div></div></div>~is', $innerContent, $rows);
 
-        preg_matchx_all('~<div class="js-element.*?</i>В избранное</a></div></div></div></div>~is', $innerContent, $rows);
-
-//echo htmlspecialchars($content);
-//exit;
         $data = [];
         foreach ($rows[0] as $rowContent) {
             $row = [];

@@ -1,9 +1,10 @@
 <?php
 
+namespace KorShop;
 
-class POSTS
+class Posts
 {
-    function POST($key, $default = '')
+    function Post($key, $default = '')
     {
         if (array_key_exists($key, $_POST)) {
             return $_POST[$key];
@@ -12,4 +13,3 @@ class POSTS
         }
     }
 }
-$resultPost = new POSTS();

@@ -1,6 +1,8 @@
 <?php
-namespace bd;
-class Database
+
+namespace KorShop;
+
+class DataBase
 {
     private $connection;
     function __construct($host, $username, $password, $dbname)
