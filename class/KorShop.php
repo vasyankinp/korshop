@@ -6,7 +6,6 @@ use DateTime;
 
 class KorShop
 {
-
     function parserKorShopAll($url, $fromPage = 1, $maxPage = false)
     {
         $dataAll = [];
@@ -36,10 +35,10 @@ class KorShop
 
     function parserKorShopPage($url)
     {
+//        $curl = new LoadContentFromCurl();
+        $res = new Guzzle();
 
-    $res = new Guzzle();
-
-        $content = $res->guzzleLoad($url, $cash = 3600);
+        $content = $res->CurlAndGuzzleLoad($url, $cash = 3600);
 
         $error = new Errors();
         $error->preg_matchx('~<div class="showcase clearfix" id="showcaseview">(.*?)<div class="ajaxpages showcase">~is', $content, $a);
@@ -60,7 +59,7 @@ class KorShop
             preg_match('~<div class="name"><a href="(.*?)"~is', $rowContent, $a);
             $row['url'] = 'https://korshop.ru' . $a[1];
 // берем данные из карточки
-            $cardContent = $res->guzzleLoad($row['url'], 86400);
+            $cardContent = $res->CurlAndGuzzleLoad($row['url'], 86400);
 
             if (preg_match('~<div class="exp_date">\s*<b>Срок годности:</b>\s*(.*?)\s*</div>\s*<div class="previewtext" itemprop="description">~is', $cardContent, $a)) {
                 $endsDate = $a[1];

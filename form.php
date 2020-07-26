@@ -22,7 +22,7 @@ include 'index.php';
             <label><a href="<?= $url ?>" target="_blank">Url</a></label>
             <input type="text" class="form-control" name="url" value="<?= $url ?>" style="width: 400px;">
         </div>
-        
+
         <div class="form-group">
             <label for="">Товар</label>
             <select id='select' class="form-control">
@@ -34,7 +34,7 @@ include 'index.php';
             </select>
             </select>
         </div>
-        
+
         <div class="form-group">
             <label>Показать как:</label>
             <?php
@@ -97,12 +97,12 @@ include 'index.php';
                 foreach ($data as $k => $row) {
                     ?>
                     <tr>
-                        <td><a href="<?=$row['url']?>" target="_blank"><?=$row['title'] ?></a></td>
-                        <td><?=$row['price'] ?></td>
-                        <td><?=$row['description'] ?></td>
-                        <td><?=$row['endsDate'] ?></td>
-                        <td><img src="<?=$row['images'] ?>" alt=""></td>
-                        <td><?=$row['url'] ?></td>
+                        <td><a href="<?= $row['url'] ?>" target="_blank"><?= $row['title'] ?></a></td>
+                        <td><?= $row['price'] ?></td>
+                        <td><?= $row['description'] ?></td>
+                        <td><?= $row['endsDate'] ?></td>
+                        <td><img src="<?= $row['images'] ?>" alt=""></td>
+                        <td><?= $row['url'] ?></td>
                     </tr>
                     <?php
                 }
@@ -114,6 +114,7 @@ include 'index.php';
     }
 
     use KorShop\Database;
+
     //запись в бд с проверкой чекбокса...
     if ($_POST['loadPars'] == 1) {
         $title = $_POST['title'];
@@ -147,9 +148,9 @@ include 'index.php';
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-    $("#select").change(function(e) {
-$("input[name='url']").val(e.target.value);
-});
+    $("#select").change(function (e) {
+        $("input[name='url']").val(e.target.value);
+    });
 </script>
 
 </body>

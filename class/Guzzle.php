@@ -4,9 +4,9 @@ namespace KorShop;
 
 use GuzzleHttp\Client as Client;
 
-class Guzzle {
-
-    function guzzleLoad($url, $cash = 0)
+class Guzzle implements LoadCoupons
+{
+    function CurlAndGuzzleLoad($url, $cash = 0)
     {
         $this->fromCash = false;
         $cacheId = $url;
@@ -27,4 +27,5 @@ class Guzzle {
         $setCash->setCache($content, $cacheId);
         return $content;
     }
+
 }

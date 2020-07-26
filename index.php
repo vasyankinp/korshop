@@ -2,6 +2,7 @@
 require 'vendor/autoload.php';
 
 use KorShop\Posts;
+
 $resultPost = new Posts();
 
 
