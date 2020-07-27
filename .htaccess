@@ -1,5 +1,11 @@
-<IfModule dir_module>
+<IfModule mod_rewrite.c>
     DirectoryIndex index.php index.html
+    RewriteEngine On
+    RewriteBase /korshop
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+#    RewriteRule . /form.php [L]
+    RewriteRule ^(.*)$ /$1.php? [QSA,L]
 </IfModule>
 AddDefaultCharset UTF-8
 AddCharset UTF-8 .html
