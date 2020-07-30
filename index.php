@@ -1,34 +1,25 @@
 <?php
-//require 'vendor/autoload.php';
+
+
+//require 'class/Routing/Route.php';
 //
-//use KorShop\HttpRequest;
 //
-//$resultPost = new HttpRequest();
+//route('/form', function () {
+//include "form.php";
+//});
+//route('/result', function () {
+//    include "result.php";
+//});
 //
-//$url = 'https://korshop.ru/catalog/ris_lapsha/ris_i_produkty_iz_nego/';
-//$url = $_POST['url'] ?: $url;
-
-require 'class/Routing/Route.php';
+//$action = $_SERVER['REQUEST_URI'];
+//dispatch($action);
 
 
-route('/form', function () {
-include "form.php";
-});
-route('/result', function () {
-    include "result.php";
-});
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
-$action = $_SERVER['REQUEST_URI'];
-dispatch($action);
+define('ROOT', dirname(__FILE__));
+require_once(ROOT . '/components/Router.php');
 
-
-//$route = $_GET['route'];
-//
-//switch ($route) {
-//    case 'form':
-//        require 'form.php';
-//        break;
-//    case 'result':
-//        require 'result.php';
-//        break;
-//}
+$router = new Router();
+$router->run();

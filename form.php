@@ -6,7 +6,7 @@ use KorShop\HttpRequest;
 $resultPost = new HttpRequest();
 
 $url = 'https://korshop.ru/catalog/ris_lapsha/ris_i_produkty_iz_nego/';
-$url = $_POST['url'] ?: $url;
+//$url = $_POST['url'] ?: $url;
 ?>
 <!doctype html>
 <html lang="en">
@@ -82,7 +82,7 @@ $url = $_POST['url'] ?: $url;
 
     use KorShop\KorShop;
 
-    if ($_POST['url']) {
+    if (isset($_POST['url'])) {
         $korShop = new KorShop();
         $data = $korShop->parserKorShopAll($_POST['url'], $fromPage = 1, $_POST['maxPage']);
 
@@ -124,7 +124,7 @@ $url = $_POST['url'] ?: $url;
     use KorShop\Database;
 
     //запись в бд с проверкой чекбокса...
-    if ($_POST['loadPars'] == 1) {
+    if (isset($_POST['loadPars']) == 1) {
         $title = $_POST['title'];
         $price = $_POST['price'];
         $images = $_POST['images'];
