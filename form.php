@@ -1,7 +1,7 @@
 <?php
 
-use KorShop\HttpRequest;
 
+use KorShop\HttpRequest;
 
 $resultPost = new HttpRequest();
 
@@ -73,7 +73,10 @@ $url = 'https://korshop.ru/catalog/ris_lapsha/ris_i_produkty_iz_nego/';
             <lavel><input type="checkbox" name="loadPars" value="1">Спарсить</lavel>
         </div>
         <button class="btn btn-default btn-success">выполнить</button>
-        <button class="btn btn-default btn-info" formaction="result.php">Проверить БД</button>
+        <button class="btn btn-default btn-info" name="categ" formaction="categories.php">Categories</button>
+        <button class="btn btn-default btn-info" onclick="script(event)">Проверить БД</button>
+
+
     </form>
 
     <hr/>
@@ -142,6 +145,7 @@ $url = 'https://korshop.ru/catalog/ris_lapsha/ris_i_produkty_iz_nego/';
     }
 
     ?>
+    <div id="output"></div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -159,6 +163,7 @@ $url = 'https://korshop.ru/catalog/ris_lapsha/ris_i_produkty_iz_nego/';
         $("input[name='url']").val(e.target.value);
     });
 </script>
+<script src="script.js"></script>
 
 </body>
 </html>
