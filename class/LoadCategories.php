@@ -20,9 +20,11 @@ class LoadCategories
 
         $error->preg_matchx('~<div class="mainsections clearfix">(.*?)</ul></div></div></div><div class="fancybox-overlay2 fancybox-overlay-fixed2">~is', $content, $a);
         $innerContent = $a[0];
+//        echo htmlspecialchars($innerContent);
+//        exit;
         $rows = preg_split('~<li class="section"~', $innerContent);
         array_shift($rows);
-        $error->preg_matchx_all('~<li class="section"(.*?)</a>\s*<li class="section"~is', $innerContent, $rows);
+        $error->preg_matchx_all('~<li class="section"(.*?)<span style="color:#000;">~is', $innerContent, $rows);
         $data = [];
         foreach ($rows[0] as $rowContent) {
             $row = [];

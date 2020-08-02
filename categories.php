@@ -21,6 +21,7 @@ $content = $result->parserCategories($urlCategories);
 <body>
 <form action="" method="post">
     <div>
+        <button class="btn btn-default btn-success" formaction="/form"><--назад</button>
         <table class="table table-condensed table-bordered table-hover" style="width: auto">
             <tr>
                 <th>Товар</th>
@@ -38,7 +39,7 @@ $content = $result->parserCategories($urlCategories);
             ?>
         </table>
         <?php
-if (isset($_POST['loadPars'])) {
+if (isset($_POST['load'])) {
     $title = $_POST['title'];
     $urlKor = $_POST['uri'];
     $bd = new DataBase("localhost", "root", "root", 'korshop');
@@ -51,7 +52,7 @@ if (isset($_POST['loadPars'])) {
     }
 }
 ?>
-        <button class="btn btn-default btn-success" name="loadPars">спарсить</button>
+        <button class="btn btn-default btn-success" name="load">спарсить</button>
     </div>
 </form>
 </body>
