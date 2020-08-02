@@ -1,25 +1,11 @@
 <?php
 
+require 'vendor/autoload.php';
 
-//require 'class/Routing/Route.php';
-//
-//
-//route('/form', function () {
-//include "form.php";
-//});
-//route('/result', function () {
-//    include "result.php";
-//});
-//
-//$action = $_SERVER['REQUEST_URI'];
-//dispatch($action);
+use KorShop\Routes;
+
+$router = new Routes();
+$router->get();
 
 
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
 
-define('ROOT', dirname(__FILE__));
-require_once(ROOT . '/components/Router.php');
-
-$router = new Router();
-$router->run();
