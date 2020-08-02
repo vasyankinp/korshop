@@ -1,8 +1,7 @@
 <?php
 
-//require 'vendor/autoload.php';
-
 use KorShop\HttpRequest;
+
 
 $resultPost = new HttpRequest();
 

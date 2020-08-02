@@ -2,6 +2,7 @@
 
 namespace KorShop;
 
+
 class Routes
 {
     public $uri;
@@ -23,7 +24,7 @@ class Routes
                 break;
             }
         }
-        if($uri != $key) {
+        if ($uri != $key) {
             require "error404.php";
         }
     }
