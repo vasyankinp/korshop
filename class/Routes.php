@@ -28,7 +28,7 @@ class Routes
 //        }
 //    }
 //        $routes = "array.php";
-        if ((include 'array.php') == TRUE) {
+        if (!file_exists(include 'array.php') == TRUE) {
             if (isset($array[$uri])) {
                 require $array[$uri];
             } else {
