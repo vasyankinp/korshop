@@ -9,7 +9,7 @@
 </head>
 <body>
 <form method="post">
-    <button formaction="form.php" class="btn btn-default btn-success"><-- Назад</button>
+    <button formaction="/form" class="btn btn-default btn-success"><-- Назад</button>
 </form>
 </body>
 </html>
