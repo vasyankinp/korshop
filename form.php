@@ -1,5 +1,13 @@
 <?php
-include 'index.php';
+
+//require 'vendor/autoload.php';
+
+use KorShop\HttpRequest;
+
+$resultPost = new HttpRequest();
+
+$url = 'https://korshop.ru/catalog/ris_lapsha/ris_i_produkty_iz_nego/';
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -20,14 +28,27 @@ include 'index.php';
     <form action="" class="form-inline korshop-form" method="post">
         <div class="form-group">
             <label><a href="<?= $url ?>" target="_blank">Url</a></label>
-            <input type="text" class="form-control" name="url" value="<?= $url ?>" style="width: 600px;">
+            <input type="text" class="form-control" name="url" value="<?= $url ?>" style="width: 400px;">
         </div>
+
+        <div class="form-group">
+            <label for="">Товар</label>
+            <select id='select' class="form-control">
+                <option value="https://korshop.ru/catalog/ris_lapsha/ris_i_produkty_iz_nego/">РИС</option>
+                <option value="https://korshop.ru/catalog/ris_lapsha/lapsha/">Лапша</option>
+                <option value="https://korshop.ru/catalog/sousy_pasty_uksus_/">Соусы, пасты, уксус</option>
+                <option value="https://korshop.ru/catalog/sladosti_sneki/">Сладости, снэки</option>
+                <option value="https://korshop.ru/catalog/napitki_chay_kofe_zhenshen/">Чай, кофе</option>
+            </select>
+            </select>
+        </div>
+
         <div class="form-group">
             <label>Показать как:</label>
             <?php
             $showAs = [
-                'print_r' => 'массив',
-                'table' => 'таблица'
+                'table' => 'таблица',
+                'print_r' => 'массив'
             ];
             ?>
             <select name="showAs" class="form-control">
@@ -45,7 +66,8 @@ include 'index.php';
         &nbsp;
         <div class="form-group">
             <label for="">кол-во</label>
-            <input type="text" class="form-control" name="maxPage" value="<?= POST('maxPage', 1) ?>"
+
+            <input type="text" class="form-control" name="maxPage" value="<?= $resultPost->post('maxPage', 1) ?>"
                    style="width: 50px;">
         </div>
         <div class="checkbox">
@@ -56,19 +78,13 @@ include 'index.php';
     </form>
 
     <hr/>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-            crossorigin="anonymous"></script>
+
     <?php
-    include 'bd.php';
-    if ($_POST['url']) {
-        $korShop = new Korshop;
+
+    use KorShop\KorShop;
+
+    if (isset($_POST['url'])) {
+        $korShop = new KorShop();
         $data = $korShop->parserKorShopAll($_POST['url'], $fromPage = 1, $_POST['maxPage']);
 
         if ($_POST['showAs'] == 'print_r') {
@@ -91,23 +107,25 @@ include 'index.php';
                 foreach ($data as $k => $row) {
                     ?>
                     <tr>
-                        <td><a href="<?=$row['url']?>" target="_blank"><?=$row['title'] ?></a></td>
-                        <td><?=$row['price'] ?></td>
-                        <td><?=$row['description'] ?></td>
-                        <td><?=$row['endsDate'] ?></td>
-                        <td><img src="<?=$row['images'] ?>" alt=""></td>
-                        <td><?=$row['url'] ?></td>
+                        <td><a href="<?= $row['url'] ?>" target="_blank"><?= $row['title'] ?></a></td>
+                        <td><?= $row['price'] ?></td>
+                        <td><?= $row['description'] ?></td>
+                        <td><?= $row['endsDate'] ?></td>
+                        <td><img src="<?= $row['images'] ?>" alt=""></td>
+                        <td><?= $row['url'] ?></td>
                     </tr>
                     <?php
                 }
                 ?>
             </table>
             <?php
-//    echo '<pre>'; print_r($data); echo '<pre/>';
         }
     }
+
+    use KorShop\Database;
+
     //запись в бд с проверкой чекбокса...
-    if ($_POST['loadPars'] == 1) {
+    if (isset($_POST['loadPars']) == 1) {
         $title = $_POST['title'];
         $price = $_POST['price'];
         $images = $_POST['images'];
@@ -119,7 +137,6 @@ include 'index.php';
             $bd->query("INSERT INTO `product`(`title`, `price`, `images`, `url`, `endsDate`, `description`) VALUES ('{$store['title']}', '{$store['price']}', '{$store['images']}', '{$store['url']}', '{$store['endsDate']}', '{$store['description']}');");
         }
         $result = mysqli_query($bd);
-
         if ($result == false) {
             print("Произошла ошибка при выполнении запроса");
         }
@@ -127,5 +144,22 @@ include 'index.php';
 
     ?>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $("#select").change(function (e) {
+        $("input[name='url']").val(e.target.value);
+    });
+</script>
+
 </body>
 </html>

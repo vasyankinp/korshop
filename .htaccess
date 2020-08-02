@@ -1,5 +1,11 @@
-<IfModule dir_module>
-    DirectoryIndex index.php index.html
+RewriteEngine on
+RewriteBase /localhost
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /index.php?route=$1 [QSA,L]
+<IfModule mod_rewrite.c>
+DirectoryIndex index.php index.html
 </IfModule>
 AddDefaultCharset UTF-8
 AddCharset UTF-8 .html
