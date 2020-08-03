@@ -74,7 +74,8 @@ $url = 'https://korshop.ru/catalog/ris_lapsha/ris_i_produkty_iz_nego/';
         </div>
         <button class="btn btn-default btn-success">выполнить</button>
         <button class="btn btn-default btn-info" name="categ" formaction="/categories">Categories</button>
-        <button class="btn btn-default btn-info" onclick="script(event)">Проверить БД</button>
+        <!--        <button class="btn btn-default btn-info" onclick="script(event)">Проверить БД</button>-->
+        <button class="btn btn-default btn-info" formaction="/result">Проверить БД</button>
 
 
     </form>
@@ -145,7 +146,6 @@ $url = 'https://korshop.ru/catalog/ris_lapsha/ris_i_produkty_iz_nego/';
     }
 
     ?>
-    <div id="output"></div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -163,7 +163,6 @@ $url = 'https://korshop.ru/catalog/ris_lapsha/ris_i_produkty_iz_nego/';
         $("input[name='url']").val(e.target.value);
     });
 </script>
-<script src="script.js"></script>
 
 </body>
 </html>

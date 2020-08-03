@@ -9,7 +9,7 @@ use KorShop\Loaders\GuzzleLoader;
 class LoadCategories
 {
 
-    function parserCategories($urlCategories)
+    public function parserCategories($urlCategories)
     {
 
         $res = new GuzzleLoader();
