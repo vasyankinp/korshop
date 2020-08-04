@@ -125,24 +125,11 @@ $url = 'https://korshop.ru/catalog/ris_lapsha/ris_i_produkty_iz_nego/';
         }
     }
 
-    use KorShop\Database;
+    use KorShop\LoadPars;
 
-    //запись в бд с проверкой чекбокса...
     if (isset($_POST['loadPars']) == 1) {
-        $title = $_POST['title'];
-        $price = $_POST['price'];
-        $images = $_POST['images'];
-        $urlKor = $_POST['url'];
-        $endsDate = $_POST['endsDate'];
-        $description = $_POST['description'];
-        $bd = new DataBase("localhost", "root", "root", 'korshop');
-        foreach ($data as $store) {
-            $bd->query("INSERT INTO `product`(`title`, `price`, `images`, `url`, `endsDate`, `description`) VALUES ('{$store['title']}', '{$store['price']}', '{$store['images']}', '{$store['url']}', '{$store['endsDate']}', '{$store['description']}');");
-        }
-        $result = mysqli_query($bd);
-        if ($result == false) {
-            print("Произошла ошибка при выполнении запроса");
-        }
+        $pars = new LoadPars();
+        $parser = $pars->startParser($data);
     }
 
     ?>

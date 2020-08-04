@@ -14,5 +14,6 @@ class LoadingProducts
         while ($row = mysqli_fetch_array($result)) {
             print("Название товара: " . $row['title'] . "; Цена товара: " . $row['price'] . "; Срок годности: " . $row['endsDate'] . "; Страница товара: " . $row['url'] . "<br>");
         }
+        return $row;
     }
 }

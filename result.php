@@ -19,7 +19,7 @@ use KorShop\LoadingProducts;
 
 $result = new LoadingProducts();
 $products = $result->getProducts();
-echo $products;
+//echo $products;
 
 ?>
 
