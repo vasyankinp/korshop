@@ -128,7 +128,7 @@ $url = 'https://korshop.ru/catalog/ris_lapsha/ris_i_produkty_iz_nego/';
     use KorShop\LoadPars;
 
     if (isset($_POST['loadPars']) == 1) {
-        $pars = new LoadPars();
+        $pars = new LoadPars((new HttpRequest()));
         $parser = $pars->startParser($data);
     }
 

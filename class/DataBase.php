@@ -2,9 +2,15 @@
 
 namespace KorShop;
 
+
 class DataBase
 {
     private $connection;
+    public $host;
+    public $username;
+    public $password;
+    public $dbname;
+
 
     function __construct($host, $username, $password, $dbname)
     {

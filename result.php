@@ -18,7 +18,7 @@
 use KorShop\LoadingProducts;
 
 $result = new LoadingProducts();
-$products = $result->getProducts();
+$products = $result->getProducts($host, $username, $password, $dbname);
 //echo $products;
 
 ?>
