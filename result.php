@@ -18,13 +18,13 @@
 use KorShop\LoadingProducts;
 
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__, '.env');
-$dotenv->load();
+
 
 $host = $_SERVER['DB_HOST'];
 $username = $_SERVER['DB_USER'];
 $password = $_SERVER['DB_PASSWORD'];
 $dbname = $_SERVER['DB_NAME'];
+
 
 $result = new LoadingProducts();
 $products = $result->getProducts($host, $username, $password, $dbname);

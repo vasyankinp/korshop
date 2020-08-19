@@ -36,7 +36,6 @@ class KorShop
 
     public function parserKorShopPage($url)
     {
-//        $curl = new CurlLoader();
         $res = new GuzzleLoader();
 
         $content = $res->curlAndGuzzleLoad($url, $cash = 3600);

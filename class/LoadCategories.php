@@ -15,6 +15,8 @@ class LoadCategories
         $res = new GuzzleLoader();
 
         $content = $res->curlAndGuzzleLoad($urlCategories, $cash = 3600);
+//        echo htmlspecialchars($content);
+//        exit;
 
         $error = new Errors();
 
